@@ -5,11 +5,11 @@ namespace CafeDirect.Models;
 
 public partial class OrderItem
 {
-    public int OrderItemId { get; set; }
+    public long OrderItemId { get; set; }
 
-    public int Order { get; set; }
+    public long Order { get; set; }
 
-    public int? MenuItem { get; set; }
+    public long? MenuItem { get; set; }
 
     public virtual Menu? MenuItemNavigation { get; set; }
 

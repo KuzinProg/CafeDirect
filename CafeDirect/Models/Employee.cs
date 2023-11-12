@@ -5,7 +5,7 @@ namespace CafeDirect.Models;
 
 public partial class Employee
 {
-    public int EmployeeId { get; set; }
+    public long EmployeeId { get; set; }
 
     public string Login { get; set; } = null!;
 

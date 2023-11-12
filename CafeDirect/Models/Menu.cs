@@ -5,7 +5,7 @@ namespace CafeDirect.Models;
 
 public partial class Menu
 {
-    public int MenuId { get; set; }
+    public long MenuId { get; set; }
 
     public string Name { get; set; } = null!;
 

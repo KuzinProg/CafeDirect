@@ -5,9 +5,9 @@ namespace CafeDirect.Models;
 
 public partial class Order
 {
-    public int OrderId { get; set; }
+    public long OrderId { get; set; }
 
-    public int Waiter { get; set; }
+    public long Waiter { get; set; }
 
     public string? Status { get; set; }
 

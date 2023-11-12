@@ -7,7 +7,7 @@ public partial class Schedule
 {
     public int ScheduleId { get; set; }
 
-    public int Employee { get; set; }
+    public long Employee { get; set; }
 
     public string WorkMode { get; set; } = null!;
 
