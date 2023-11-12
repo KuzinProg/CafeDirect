@@ -1,22 +1,24 @@
 ﻿using System;
-using Avalonia.Controls;
 using CafeDirect.Context;
 using CafeDirect.Models;
-using Menu = CafeDirect.Models.Menu;
+using ReactiveUI;
 
 namespace CafeDirect.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    public string Greeting => Convert.ToString(Test())+"IDCON";
+    private ViewModelBase _contentViewModel;
+    public AuthControlViewModel AuthWindow { get; }
 
-    private int Test()
+    public MainWindowViewModel()
     {
-        DataBaseContext db = new DataBaseContext();
-        Menu menu1 = new Menu { Name = "Egor" , Price = 600 };
-        Menu menu2 = new Menu { Name = "Marie" , Price = 700 };
-        db.Menus.AddRange(menu1,menu2);
-        db.SaveChangesAsync();
-        return 101;
+        AuthWindow = new AuthControlViewModel();
+        _contentViewModel = AuthWindow;
+    }
+
+    public ViewModelBase ContentViewModel
+    {
+        get => _contentViewModel;
+        private set => this.RaiseAndSetIfChanged(ref _contentViewModel, value);
     }
 }
