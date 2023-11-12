@@ -3,6 +3,11 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="CafeDirect/App.axaml" value="CafeDirect/CafeDirect.csproj" />
+        <entry key="CafeDirect/AuthControl.axaml" value="CafeDirect/CafeDirect.csproj" />
+        <entry key="CafeDirect/Views/AuthControl.axaml" value="CafeDirect/CafeDirect.csproj" />
+        <entry key="CafeDirect/Views/AuthControlView.axaml" value="CafeDirect/CafeDirect.csproj" />
+        <entry key="CafeDirect/Views/AuthWindow.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/MainWindow.axaml" value="CafeDirect/CafeDirect.csproj" />
       </map>
     </option>
