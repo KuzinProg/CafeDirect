@@ -21,4 +21,9 @@ public class MainWindowViewModel : ViewModelBase
         get => _contentViewModel;
         private set => this.RaiseAndSetIfChanged(ref _contentViewModel, value);
     }
+
+    public void Registration()
+    {
+        _contentViewModel = new RegistrationControlViewModel();
+    }
 }
