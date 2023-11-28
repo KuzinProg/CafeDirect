@@ -6,9 +6,9 @@ using ReactiveUI;
 
 namespace CafeDirect.Views;
 
-public partial class AuthControlView : ReactiveUserControl<AuthControlViewModel>
+public partial class MainWindowView : ReactiveWindow<MainWindowViewModel>
 {
-    public AuthControlView()
+    public MainWindowView()
     {
         this.WhenActivated(disposables => { });
         AvaloniaXamlLoader.Load(this);

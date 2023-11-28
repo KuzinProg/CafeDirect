@@ -5,7 +5,7 @@ using ReactiveUI;
 
 namespace CafeDirect.ViewModels;
 
-public class AuthControlViewModel : ViewModelBase
+public class AuthControlViewModel : ReactiveObject, IRoutableViewModel
 {
     private string _password;
     private string _login;
@@ -45,4 +45,6 @@ public class AuthControlViewModel : ViewModelBase
 
     }
 
+    public string? UrlPathSegment { get; }
+    public IScreen HostScreen { get; }
 }

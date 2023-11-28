@@ -9,6 +9,7 @@
         <entry key="CafeDirect/Views/AuthControlView.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/AuthWindow.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/MainWindow.axaml" value="CafeDirect/CafeDirect.csproj" />
+        <entry key="CafeDirect/Views/MainWindowView.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/RegistrationControlView.axaml" value="CafeDirect/CafeDirect.csproj" />
       </map>
     </option>

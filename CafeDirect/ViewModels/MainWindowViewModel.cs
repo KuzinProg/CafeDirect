@@ -1,29 +1,35 @@
 ﻿using System;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Runtime.Serialization;
+using System.Windows.Input;
 using CafeDirect.Context;
 using CafeDirect.Models;
 using ReactiveUI;
 
 namespace CafeDirect.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+[DataContract]
+public class MainWindowViewModel : ReactiveObject, IScreen
 {
-    private ViewModelBase _contentViewModel;
-    public AuthControlViewModel AuthWindow { get; }
+    private RoutingState router = new RoutingState();
+
+    [DataMember]
+    public RoutingState Router
+    {
+        get => router;
+        set => this.RaiseAndSetIfChanged(ref router, value);
+    }
+
+    private readonly ReactiveCommand<Unit, Unit> auth;
+    private readonly ReactiveCommand<Unit, Unit> registration;
+    public ICommand AuthWindow => auth;
+    public ICommand RegistrationWindow => registration;
 
     public MainWindowViewModel()
     {
-        AuthWindow = new AuthControlViewModel();
-        _contentViewModel = AuthWindow;
-    }
-
-    public ViewModelBase ContentViewModel
-    {
-        get => _contentViewModel;
-        private set => this.RaiseAndSetIfChanged(ref _contentViewModel, value);
-    }
-
-    public void Registration()
-    {
-        _contentViewModel = new RegistrationControlViewModel();
+        var canAuth = this.WhenAnyObservable(o => o.Router.CurrentViewModel)
+            .Select(current => !(current is AuthControlViewModel));
+        auth = ReactiveCommand.Create(() => { Router.Navigate.Execute(new AuthControlViewModel());}, canAuth);
     }
 }

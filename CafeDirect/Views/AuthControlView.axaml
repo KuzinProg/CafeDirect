@@ -2,12 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CafeDirect.Views.AuthControlView">
+             d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:ViewModels="clr-namespace:CafeDirect.ViewModels"
+             x:Class="CafeDirect.Views.AuthControlView"
+             d:DataContext="{ViewModels:AuthControlViewModel}"
+             x:DataType="ViewModels:AuthControlViewModel"
+             mc:Ignorable="d">
     <StackPanel Margin="270,100" Spacing="10">
         <TextBox Watermark="Логин" Text="{Binding Login}"/>
         <TextBox PasswordChar="•" Watermark="Пароль" Text="{Binding Password}"/>
         <Button Command="{Binding EnterCommand}">Вход</Button>
-        <Button Command="{Binding $parent[Window].DataContext.Registration}">Регистрация</Button>
+        <Button Command="{Binding }">Регистрация</Button>
     </StackPanel>
 </UserControl>
