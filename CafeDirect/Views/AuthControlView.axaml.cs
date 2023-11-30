@@ -1,16 +1,17 @@
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using CafeDirect.ViewModels;
 using ReactiveUI;
 
-namespace CafeDirect.Views;
-
-public partial class AuthControlView : ReactiveUserControl<AuthControlViewModel>
+namespace CafeDirect.Views
 {
-    public AuthControlView()
+
+    public class AuthControlView : ReactiveUserControl<AuthControlViewModel>
     {
-        this.WhenActivated(disposables => { });
-        AvaloniaXamlLoader.Load(this);
+        public AuthControlView()
+        {
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
+        }
     }
 }

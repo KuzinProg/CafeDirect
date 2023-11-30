@@ -1,16 +1,16 @@
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using CafeDirect.ViewModels;
 using ReactiveUI;
 
-namespace CafeDirect.Views;
-
-public partial class MainWindowView : ReactiveWindow<MainWindowViewModel>
+namespace CafeDirect.Views
 {
-    public MainWindowView()
+    public sealed class MainWindowView : ReactiveWindow<MainWindowViewModel>
     {
-        this.WhenActivated(disposables => { });
-        AvaloniaXamlLoader.Load(this);
+        public MainWindowView()
+        {
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
+        }
     }
 }

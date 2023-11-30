@@ -1,0 +1,15 @@
+{
+  "$type": "CafeDirect.ViewModels.MainViewModel, CafeDirect",
+  "Router": {
+    "$type": "CafeDirect.RoutingState, CafeDirect",
+    "_navigationStack": {
+      "$type": "System.Collections.ObjectModel.ObservableCollection`1[[CafeDirect.IRoutableViewModel, CafeDirect]], System.ObjectModel",
+      "$values": [
+        {
+          "$type": "CafeDirect.ViewModels.SearchViewModel, CafeDirect",
+          "SearchQuery": "Hello, world."
+        }
+      ]
+    }
+  }
+}

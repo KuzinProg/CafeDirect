@@ -7,29 +7,30 @@ using CafeDirect.Context;
 using CafeDirect.Models;
 using ReactiveUI;
 
-namespace CafeDirect.ViewModels;
-
-[DataContract]
-public class MainWindowViewModel : ReactiveObject, IScreen
+namespace CafeDirect.ViewModels
 {
-    private RoutingState router = new RoutingState();
-
-    [DataMember]
-    public RoutingState Router
+    [DataContract]
+    public class MainWindowViewModel : ReactiveObject, IScreen
     {
-        get => router;
-        set => this.RaiseAndSetIfChanged(ref router, value);
-    }
+        private readonly ReactiveCommand<Unit, Unit> auth;
+        //private readonly ReactiveCommand<Unit, Unit> registration;
+        private RoutingState router = new RoutingState();
 
-    private readonly ReactiveCommand<Unit, Unit> auth;
-    private readonly ReactiveCommand<Unit, Unit> registration;
-    public ICommand AuthWindow => auth;
-    public ICommand RegistrationWindow => registration;
+        [DataMember]
+        public RoutingState Router
+        {
+            get => router;
+            set => this.RaiseAndSetIfChanged(ref router, value);
+        }
 
-    public MainWindowViewModel()
-    {
-        var canAuth = this.WhenAnyObservable(o => o.Router.CurrentViewModel)
-            .Select(current => !(current is AuthControlViewModel));
-        auth = ReactiveCommand.Create(() => { Router.Navigate.Execute(new AuthControlViewModel());}, canAuth);
+        public MainWindowViewModel()
+        {
+            var canAuth = this.WhenAnyObservable(o => o.Router.CurrentViewModel)
+                .Select(current => !(current is AuthControlViewModel));
+            auth = ReactiveCommand.Create(() => { Router.Navigate.Execute(new AuthControlViewModel()); }, canAuth);
+        }
+
+        public ICommand AuthWindow => auth;
+        //public ICommand RegistrationWindow => registration;
     }
 }
