@@ -9,17 +9,8 @@
         x:DataType="ViewModels:MainWindowViewModel"
         Title="Cafe Direct">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <reactiveUi:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
-            <reactiveUi:RoutedViewHost.DefaultContent>
-                <TextBlock Text="Default Content" />
-            </reactiveUi:RoutedViewHost.DefaultContent>
-        </reactiveUi:RoutedViewHost>
-        <Grid>
-            <Button Grid.Row="1" Content="AUTH" Command="{Binding AuthWindow}"></Button>
-        </Grid>
+        <reactiveUi:RoutedViewHost Router="{Binding Router}"
+                                   HorizontalContentAlignment="Stretch"
+                                   VerticalContentAlignment="Stretch" />
     </Grid>
 </Window>

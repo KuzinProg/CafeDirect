@@ -8,17 +8,24 @@ namespace CafeDirect.ViewModels
 {
 
     [DataContract]
-    public class AuthControlViewModel : ReactiveObject, IRoutableViewModel
+    public class AuthControlViewModel : ReactiveObject, IRoutableViewModel, IScreen
     {
         private string _password;
         private string _login;
 
-        public AuthControlViewModel()
+        private RoutingState router = new RoutingState();
+
+        public AuthControlViewModel(IScreen screen)
         {
+            HostScreen = screen;
             EnterCommand = ReactiveCommand.Create(Enter);
+            // TODO: Замена View
+            RegistrationCommand = ReactiveCommand.CreateFromObservable(() =>
+                    HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel()));
         }
 
         public ReactiveCommand<Unit, Unit> EnterCommand { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> RegistrationCommand { get; }
 
         public string Password
         {
@@ -44,5 +51,10 @@ namespace CafeDirect.ViewModels
 
         public string? UrlPathSegment { get; }
         public IScreen HostScreen { get; }
+        public RoutingState Router
+        {
+            get => router;
+            set => this.RaiseAndSetIfChanged(ref router, value);
+        }
     }
 }

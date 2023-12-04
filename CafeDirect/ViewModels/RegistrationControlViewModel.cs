@@ -12,6 +12,14 @@ namespace CafeDirect.ViewModels
 
         public IScreen HostScreen { get; }
 
+        private RoutingState router = new RoutingState();
+
+        public RoutingState Router
+        {
+            get => router;
+            set => this.RaiseAndSetIfChanged(ref router, value);
+        }
+
         public RegistrationControlViewModel()
         {
 

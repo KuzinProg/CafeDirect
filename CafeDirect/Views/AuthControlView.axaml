@@ -12,6 +12,6 @@
         <TextBox Watermark="Логин" Text="{Binding Login}"/>
         <TextBox PasswordChar="•" Watermark="Пароль" Text="{Binding Password}"/>
         <Button Command="{Binding EnterCommand}">Вход</Button>
-        <Button Command="{Binding }">Регистрация</Button>
+        <Button Command="{Binding RegistrationCommand}">Регистрация</Button>
     </StackPanel>
 </UserControl>
