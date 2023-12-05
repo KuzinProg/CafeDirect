@@ -27,6 +27,7 @@ public class App : Application
         Locator.CurrentMutable.RegisterConstant<IScreen>(RxApp.SuspensionHost.GetAppState<MainWindowViewModel>());
         Locator.CurrentMutable.Register<IViewFor<AuthControlViewModel>>(() => new AuthControlView());
         Locator.CurrentMutable.Register<IViewFor<RegistrationControlViewModel>>(() => new RegistrationControlView());
+        Locator.CurrentMutable.Register<IViewFor<AdminControlViewModel>>(() => new AdminControlView());
 
         new MainWindowView { DataContext = Locator.Current.GetService<IScreen>()}.Show();
         base.OnFrameworkInitializationCompleted();

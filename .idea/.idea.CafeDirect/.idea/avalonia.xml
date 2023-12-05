@@ -5,6 +5,7 @@
       <map>
         <entry key="CafeDirect/App.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/AuthControl.axaml" value="CafeDirect/CafeDirect.csproj" />
+        <entry key="CafeDirect/Views/AdminControlView.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/AuthControl.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/AuthControlView.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/AuthWindow.axaml" value="CafeDirect/CafeDirect.csproj" />

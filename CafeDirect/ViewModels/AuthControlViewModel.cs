@@ -45,7 +45,16 @@ namespace CafeDirect.ViewModels
             var employee = context.Employees.FirstOrDefault(e => e.Password == Password && e.Login == Login);
             if (employee != null)
             {
-
+                if (employee.Role == "admin")
+                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
+                else if (employee.Role == "waiter")
+                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
+                else if (employee.Role == "cook")
+                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
+                else
+                {
+                    // TODO: Вывести признак ошибки в пароле или логине
+                }
             }
         }
 
