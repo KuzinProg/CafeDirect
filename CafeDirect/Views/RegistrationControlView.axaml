@@ -6,7 +6,37 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CafeDirect.Views.RegistrationControlView"
              x:DataType="vm:RegistrationControlViewModel">
-    <StackPanel>
-        <Button>Регистрация</Button>
-    </StackPanel>
+        <Grid Margin="270,10" >
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox Watermark="Логин" Grid.Row="0"/>
+            <TextBox PasswordChar="•" Watermark="Пароль" Grid.Row="1" />
+            <ComboBox Grid.Row="2" ></ComboBox> <!--Роли -->
+            <TextBox Watermark="Имя" Grid.Row="3"/>
+            <TextBox Watermark="Фамилия" Grid.Row="4"/>
+            <TextBox Watermark="Отчество" Grid.Row="5"/>
+            <ComboBox Grid.Row="6"></ComboBox> <!--Статус -->
+            
+            <TextBox IsReadOnly="True" Watermark="Фото" Grid.Row="7"/>
+            <Button Grid.Row="8">Загрузить...</Button>
+            
+            <TextBox IsReadOnly="True" Watermark="Контракт" Grid.Row="9"/>
+            <Button Grid.Row="10">Загрузить...</Button>
+            
+            <Button Grid.Row="11">Отмена</Button>
+            <Button Grid.Row="12">Регистрация</Button>
+            
+    </Grid>
 </UserControl>
