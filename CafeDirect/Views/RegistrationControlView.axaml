@@ -23,20 +23,18 @@
             </Grid.RowDefinitions>
             <TextBox Watermark="Логин" Grid.Row="0" Margin="0 0 0 6" Width="300"/>
             <TextBox PasswordChar="•" Watermark="Пароль" Grid.Row="1" Margin="0 0 0 6" Width="300"/>
-            <ComboBox Grid.Row="2" Margin="291 0 0 5"></ComboBox> <!--Роли -->
+            <ComboBox Grid.Row="2" Margin="291 0 0 5" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Роли -->
             <TextBox Watermark="Имя" Grid.Row="3" Margin="0 0 0 6" Width="300"/>
             <TextBox Watermark="Фамилия" Grid.Row="4" Margin="0 0 0 6" Width="300"/>
             <TextBox Watermark="Отчество" Grid.Row="5" Margin="0 0 0 5" Width="300"/>
-            <ComboBox Grid.Row="6" Margin="291 0 0 5" Grid.Column="0"></ComboBox> <!--Статус -->
             
-            <TextBox IsReadOnly="True" Watermark="Фото" Grid.Row="7" Margin="0 0 0 6" Width="300"/>
-            <Button Grid.Row="8" Margin="291 0 0 6">Загрузить...</Button>
+            <TextBox IsReadOnly="True" Watermark="Фото" Grid.Row="6" Margin="0 0 0 6" Width="300"/>
+            <Button Grid.Row="7" Margin="291 0 0 6" Command="{Binding LoadPhotoCommand}">Загрузить...</Button>
             
-            <TextBox IsReadOnly="True" Watermark="Контракт" Grid.Row="9" Margin="0 0 0 6" Width="300"/>
-            <Button Grid.Row="10" Margin="291 0 0 6">Загрузить...</Button>
+            <TextBox IsReadOnly="True" Watermark="Контракт" Grid.Row="8" Margin="0 0 0 6" Width="300"/>
+            <Button Grid.Row="9" Margin="291 0 0 6">Загрузить...</Button>
             
-            <Button Grid.Row="11" Margin="527 10 0 0">Отмена</Button>
+            <Button Grid.Row="10" Margin="527 10 0 0">Отмена</Button>
             <Button Grid.Row="11" Margin="290 10 0 0">Регистрация</Button>
-            
     </Grid>
 </UserControl>

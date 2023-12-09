@@ -6,8 +6,7 @@
       "$type": "System.Collections.ObjectModel.ObservableCollection`1[[CafeDirect.IRoutableViewModel, CafeDirect]], System.ObjectModel",
       "$values": [
         {
-          "$type": "CafeDirect.ViewModels.SearchViewModel, CafeDirect",
-          "SearchQuery": "Hello, world."
+          "$type": "CafeDirect.ViewModels.SearchViewModel, CafeDirect"
         }
       ]
     }
