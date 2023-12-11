@@ -24,14 +24,15 @@ namespace CafeDirect.ViewModels
 
         private RoutingState router = new RoutingState();
         
-        public ReactiveCommand<Unit, IRoutableViewModel?> CancelCommand { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> CancelCommand { get; }
         public ReactiveCommand<Unit, Unit> RegCommand { get; }
         
         public RegistrationControlViewModel(IScreen screen)
         {
             HostScreen = screen;
             // TODO: Замена View
-            this.CancelCommand = HostScreen.Router.NavigateBack;
+            CancelCommand = ReactiveCommand.CreateFromObservable(() =>
+                HostScreen.Router.NavigateAndReset.Execute(new AuthControlViewModel(HostScreen)));
             LoadPhotoCommand = ReactiveCommand.Create(LoadPhoto);
         }
         
@@ -108,7 +109,5 @@ namespace CafeDirect.ViewModels
             /*var topLevel = TopLevel.GetTopLevel();
             var file = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());*/
         }
-        
-        
     }
 }

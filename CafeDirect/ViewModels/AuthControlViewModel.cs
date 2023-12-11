@@ -6,7 +6,6 @@ using ReactiveUI;
 
 namespace CafeDirect.ViewModels
 {
-
     [DataContract]
     public class AuthControlViewModel : ReactiveObject, IRoutableViewModel, IScreen
     {
@@ -21,7 +20,7 @@ namespace CafeDirect.ViewModels
             EnterCommand = ReactiveCommand.Create(Enter);
             // TODO: Замена View
             RegistrationCommand = ReactiveCommand.CreateFromObservable(() =>
-                    HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel(this)));
+                    HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel(HostScreen)));
         }
 
         public ReactiveCommand<Unit, Unit> EnterCommand { get; }
