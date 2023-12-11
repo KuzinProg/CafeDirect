@@ -21,7 +21,7 @@ namespace CafeDirect.ViewModels
             EnterCommand = ReactiveCommand.Create(Enter);
             // TODO: Замена View
             RegistrationCommand = ReactiveCommand.CreateFromObservable(() =>
-                    HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel()));
+                    HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel(this)));
         }
 
         public ReactiveCommand<Unit, Unit> EnterCommand { get; }
