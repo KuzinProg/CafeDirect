@@ -6,35 +6,24 @@
              mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="600"
              x:Class="CafeDirect.Views.RegistrationControlView"
              x:DataType="vm:RegistrationControlViewModel">
-        <Grid Margin="270,10" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="38"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-            <TextBox Watermark="Логин" Grid.Row="0" Margin="0 0 0 6" Width="300" Text="{Binding Login}"/>
-            <TextBox PasswordChar="•" Watermark="Пароль" Grid.Row="1" Margin="0 0 0 6" Width="300" Text="{Binding Password}"/>
-            <ComboBox Grid.Row="2" Margin="291 0 0 5" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Роли -->
-            <TextBox Watermark="Имя" Grid.Row="3" Margin="0 0 0 6" Width="300" Text="{Binding FirstName}"/>
-            <TextBox Watermark="Фамилия" Grid.Row="4" Margin="0 0 0 6" Width="300" Text="{Binding LastName}"/>
-            <TextBox Watermark="Отчество" Grid.Row="5" Margin="0 0 0 5" Width="300" Text="{Binding MiddleName}"/>
-            
-            <TextBox IsReadOnly="True" Watermark="Фото" Grid.Row="6" Margin="0 0 0 6" Width="300"/>
-            <Button Grid.Row="7" Margin="291 0 0 6" Command="{Binding LoadPhotoCommand}">Загрузить...</Button>
-            
-            <TextBox IsReadOnly="True" Watermark="Контракт" Grid.Row="8" Margin="0 0 0 6" Width="300"/>
-            <Button Grid.Row="9" Margin="291 0 0 6">Загрузить...</Button>
-            
-            <Button Grid.Row="10" Margin="527 10 0 0" Command="{Binding CancelCommand}">Отмена</Button>
-            <Button Grid.Row="11" Margin="290 10 0 0" Command="{Binding RegCommand}">Регистрация</Button>
+        <Grid Margin="270,10">
+            <StackPanel Spacing="10" Margin="200, 0">
+                <TextBox Watermark="Логин" Text="{Binding Login}"/>
+                <TextBox PasswordChar="•" Watermark="Пароль" Text="{Binding Password}"/>
+                <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding RoleValue}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Роли -->
+                <TextBox Watermark="Имя" Text="{Binding FirstName}"/>
+                <TextBox Watermark="Фамилия" Text="{Binding LastName}"/>
+                <TextBox Watermark="Отчество" Text="{Binding MiddleName}"/>
+
+                <TextBox IsReadOnly="True" Watermark="Фото"/>
+                <Button Command="{Binding LoadPhotoCommand}">Загрузить...</Button>
+
+                <TextBox IsReadOnly="True" Watermark="Контракт"/>
+                <Button>Загрузить...</Button>
+                <DockPanel HorizontalAlignment="Center">
+                    <Button Command="{Binding CancelCommand}">Отмена</Button>
+                    <Button Command="{Binding RegCommand}">Регистрация</Button>
+                </DockPanel>
+            </StackPanel>
     </Grid>
 </UserControl>
