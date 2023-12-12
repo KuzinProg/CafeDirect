@@ -18,7 +18,6 @@ namespace CafeDirect.ViewModels
         {
             HostScreen = screen;
             EnterCommand = ReactiveCommand.Create(Enter);
-            // TODO: Замена View
             RegistrationCommand = ReactiveCommand.CreateFromObservable(() =>
                     HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel(HostScreen)));
         }
@@ -42,8 +41,10 @@ namespace CafeDirect.ViewModels
         {
             DataBaseContext context = new DataBaseContext();
             var employee = context.Employees.FirstOrDefault(e => e.Password == Password && e.Login == Login);
+            HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
             if (employee != null)
             {
+                HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
                 if (employee.Role == "admin")
                     HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
                 else if (employee.Role == "waiter")

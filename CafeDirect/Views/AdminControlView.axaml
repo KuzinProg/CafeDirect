@@ -6,7 +6,35 @@
              x:Class="CafeDirect.Views.AdminControlView"
              xmlns:vm="using:CafeDirect.ViewModels"
              x:DataType="vm:AdminControlViewModel">
-    <StackPanel>
-        <Label>Welcome to Admin!</Label>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Grid.Row="0" Grid.Column="1" Width="100" BorderBrush="Aqua" BorderThickness="1">
+
+        </DataGrid>
+
+        <Button Grid.Row="0" Grid.Column="1"></Button>
+
+        <DataGrid Grid.Row="1"  Grid.Column="0">
+
+        </DataGrid>
+
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Calendar></Calendar>
+            <StackPanel>
+                <Label>Смена 1</Label>
+            </StackPanel>
+            <StackPanel>
+                <Label>Смена 2</Label>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
 </UserControl>
