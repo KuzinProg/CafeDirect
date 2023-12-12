@@ -8,6 +8,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using Avalonia.ReactiveUI;
 using CafeDirect.Context;
+using CafeDirect.Models;
 using ReactiveUI;
 
 namespace CafeDirect.ViewModels
@@ -30,10 +31,10 @@ namespace CafeDirect.ViewModels
         public RegistrationControlViewModel(IScreen screen)
         {
             HostScreen = screen;
-            // TODO: Замена View
             CancelCommand = ReactiveCommand.CreateFromObservable(() =>
                 HostScreen.Router.NavigateAndReset.Execute(new AuthControlViewModel(HostScreen)));
             LoadPhotoCommand = ReactiveCommand.Create(LoadPhoto);
+            RegCommand = ReactiveCommand.Create(Reg);
         }
         
         public class Role
@@ -98,7 +99,22 @@ namespace CafeDirect.ViewModels
 
         private void Reg()
         {
-            
+            // TODO: Проверка корректности
+            DataBaseContext context = new DataBaseContext();
+            context.Employees.Add(new Employee
+            {
+                Login = Login,
+                Password = Password,
+                Role = RoleValue.Code,
+                FirstName = FirstName,
+                LastName = LastName,
+                MiddleName = MiddleName,
+                Status = "active",
+                Photo = null,
+                Contract = null
+            });
+            context.SaveChanges();
+            HostScreen.Router.NavigateAndReset.Execute(new AuthControlViewModel(HostScreen));
         }
 
         public ReactiveCommand<Unit, Unit> LoadPhotoCommand { get; }
