@@ -1,7 +1,6 @@
 {
-  "$type": "CafeDirect.ViewModels.MainViewModel, CafeDirect",
+  "$type": "CafeDirect.ViewModels.MainWindowViewModel, CafeDirect",
   "Router": {
-    "$type": "CafeDirect.RoutingState, CafeDirect",
     "_navigationStack": {
       "$type": "System.Collections.ObjectModel.ObservableCollection`1[[CafeDirect.IRoutableViewModel, CafeDirect]], System.ObjectModel",
       "$values": [
