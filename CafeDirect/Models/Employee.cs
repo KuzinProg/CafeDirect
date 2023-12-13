@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using Avalonia.Data.Converters;
 
 namespace CafeDirect.Models;
 
 public partial class Employee
 {
+    // TODO: Добавить Дату рождения
     public long EmployeeId { get; set; }
 
     public string Login { get; set; } = null!;
