@@ -13,6 +13,7 @@
         <entry key="CafeDirect/Views/CookControlView.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/MainWindow.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/MainWindowView.axaml" value="CafeDirect/CafeDirect.csproj" />
+        <entry key="CafeDirect/Views/OrderView.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/RegistrationControlView.axaml" value="CafeDirect/CafeDirect.csproj" />
         <entry key="CafeDirect/Views/WaiterControlView.axaml" value="CafeDirect/CafeDirect.csproj" />
       </map>

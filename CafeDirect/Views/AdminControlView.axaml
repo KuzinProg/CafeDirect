@@ -41,13 +41,13 @@
                   BorderThickness="1" AutoGenerateColumns="False"
                   ItemsSource="{Binding Orders}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Номер заказа" Binding="{Binding OrderId}" />
-                <DataGridTextColumn Header="Официант" Binding="{Binding WaiterNavigation}">
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Статус" Binding="{Binding Status, Converter={StaticResource statusConverter}}" />
-                <DataGridTextColumn Header="Дата" Binding="{Binding Date}" />
-                <DataGridTextColumn Header="Столик" Binding="{Binding Place}" />
-                <DataGridTextColumn Header="Гостей" Binding="{Binding ClientsCount}" />
+                <DataGridTextColumn Header="Номер заказа" Binding="{Binding OrderId}" Width="*"/>
+                <DataGridTextColumn Header="Официант" Binding="{Binding WaiterNavigation}" Width="*">
+                </DataGridTextColumn >
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status, Converter={StaticResource statusConverter}}" Width="*"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="*"/>
+                <DataGridTextColumn Header="Столик" Binding="{Binding Place}" Width="*"/>
+                <DataGridTextColumn Header="Гостей" Binding="{Binding ClientsCount}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 

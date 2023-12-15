@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CafeDirect.Views.OrderViewModel"
+             xmlns:vm="using:CafeDirect.ViewModels"
+             xmlns:models="clr-namespace:CafeDirect.Models"
+             x:DataType="vm:OrderViewModel">
+    <StackPanel Spacing="10" Margin="200, 0">
+        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding RoleValue}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Официант -->
+        <DatePicker/><!--Дата -->
+        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding RoleValue}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Статус -->
+        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding RoleValue}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Место -->
+        <TextBox Watermark="Отчество" Text="{Binding ClientsCount}"/><!--Сколько человек -->
+        <DockPanel HorizontalAlignment="Center">
+            <Button Command="{Binding CancelCommand}">Отмена</Button>
+            <Button Command="{Binding OrderCommand}">Сохранить изменения</Button>
+        </DockPanel>
+    </StackPanel>
+</UserControl>
