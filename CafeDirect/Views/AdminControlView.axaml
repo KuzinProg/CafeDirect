@@ -8,57 +8,68 @@
              xmlns:models="clr-namespace:CafeDirect.Models"
              x:DataType="vm:AdminControlViewModel">
     <UserControl.Resources>
-        <models:RoleConverter x:Key="roleConverter"/>
-        <models:StatusConverter x:Key="statusConverter"/>
-        <models:EmployeeConverter x:Key="employeeConverter"/>
+        <models:RoleConverter x:Key="RoleConverter"/>
+        <models:StatusConverter x:Key="StatusConverter"/>
+        <models:EmployeeConverter x:Key="EmployeeConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Row="0" Grid.Column="0"
+        <DataGrid Grid.Row="0" Grid.Column="0" Height="250" BorderBrush="Gray"
                   BorderThickness="1" AutoGenerateColumns="False"
                   ItemsSource="{Binding Employees}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
                 <DataGridTextColumn Header="Имя"  Binding="{Binding FirstName}"/>
                 <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}" />
-                <DataGridTextColumn Header="Роль" Binding="{Binding Role, Converter={StaticResource roleConverter}}" />
-                <DataGridTextColumn Header="Статус" Binding="{Binding Status, Converter={StaticResource statusConverter}}" />
+                <DataGridTextColumn Header="Роль" Binding="{Binding Role, Converter={StaticResource RoleConverter}}" />
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status, Converter={StaticResource StatusConverter}}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Command="{Binding RegistrationCommand}">Регистрация</Button>
 
-        <Button Grid.Row="0" Grid.Column="1">Выход</Button>
 
-        <DataGrid Grid.Row="1"  Grid.Column="0"
+        <DataGrid Grid.Row="2"  Grid.Column="0" Height="250" BorderBrush="Gray"
                   BorderThickness="1" AutoGenerateColumns="False"
                   ItemsSource="{Binding Orders}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер заказа" Binding="{Binding OrderId}" />
-                <DataGridTextColumn Header="Официант" Binding="{Binding WaiterNavigation}">
+                <DataGridTextColumn Header="Официант">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding Converter="{StaticResource EmployeeConverter}">
+                            <Binding Path="WaiterNavigation.LastName" />
+                            <Binding Path="WaiterNavigation.FirstName" />
+                            <Binding Path="WaiterNavigation.MiddleName" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Статус" Binding="{Binding Status, Converter={StaticResource statusConverter}}" />
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status, Converter={StaticResource StatusConverter}}" />
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date}" />
                 <DataGridTextColumn Header="Столик" Binding="{Binding Place}" />
                 <DataGridTextColumn Header="Гостей" Binding="{Binding ClientsCount}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <Calendar></Calendar>
+        <StackPanel Grid.Row="0" Grid.Column="1" >
+            <Calendar HorizontalAlignment="Center"></Calendar>
             <StackPanel>
                 <Label>Смена 1</Label>
+                <ListBox></ListBox>
             </StackPanel>
             <StackPanel>
                 <Label>Смена 2</Label>
+                <ListBox></ListBox>
             </StackPanel>
-        </DockPanel>
+        </StackPanel>
+        <Button Grid.Row="1" Grid.Column="1">Выход</Button>
     </Grid>
 </UserControl>
