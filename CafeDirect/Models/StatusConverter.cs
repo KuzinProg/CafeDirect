@@ -10,9 +10,13 @@ public class StatusConverter : IValueConverter
     {
         if (value is string)
         {
-            string role = (string)value;
-            if (role == "active") return "Работает";
-            if (role == "fired") return "Уволен";
+            string status = (string)value;
+            if (status == "active") return "Работает";
+            if (status == "fired") return "Уволен";
+            if (status == "new") return "Новый";
+            if (status == "preparing") return "Готовится";
+            if (status == "paid") return "Оплачен";
+            if (status == "canceled") return "Отменён";
         }
 
         return value as string;
