@@ -29,8 +29,9 @@ namespace CafeDirect.ViewModels
         public ObservableCollection<Employee> Employees { get; }
         public ObservableCollection<Order> Orders { get; }
 
-        public AdminControlViewModel()
+        public AdminControlViewModel(IScreen screen)
         {
+            HostScreen = screen;
             DataBaseContext context = new DataBaseContext();
             Employees = new ObservableCollection<Employee>(context.Employees);
             Orders = new ObservableCollection<Order>(context.Orders);

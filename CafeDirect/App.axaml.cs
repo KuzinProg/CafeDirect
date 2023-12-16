@@ -29,7 +29,13 @@ public class App : Application
         Locator.CurrentMutable.Register<IViewFor<RegistrationControlViewModel>>(() => new RegistrationControlView());
         Locator.CurrentMutable.Register<IViewFor<AdminControlViewModel>>(() => new AdminControlView());
 
-        new MainWindowView { DataContext = Locator.Current.GetService<IScreen>()}.Show();
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = new MainWindowView { DataContext = Locator.Current.GetService<IScreen>()};
+            desktop.MainWindow.Show();
+        }
+
+        //new MainWindowView { DataContext = Locator.Current.GetService<IScreen>()}.Show();
         base.OnFrameworkInitializationCompleted();
     }
 }
