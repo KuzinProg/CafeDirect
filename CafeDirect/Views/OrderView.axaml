@@ -8,11 +8,11 @@
              xmlns:models="clr-namespace:CafeDirect.Models"
              x:DataType="vm:OrderViewModel">
     <StackPanel Spacing="10" Margin="200, 0">
-        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding RoleValue}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Официант -->
+      <!--  <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding }" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> Официант -->
         <DatePicker/><!--Дата -->
-        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding RoleValue}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Статус -->
-        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding RoleValue}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Место -->
-        <TextBox Watermark="Отчество" Text="{Binding ClientsCount}"/><!--Сколько человек -->
+        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding StatusValue}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Статус -->
+        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding Place}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Столик -->
+        <TextBox Watermark="Количество людей" Text="{Binding ClientsCount}"/><!--Сколько человек -->
         <DockPanel HorizontalAlignment="Center">
             <Button Command="{Binding CancelCommand}">Отмена</Button>
             <Button Command="{Binding OrderCommand}">Сохранить изменения</Button>
