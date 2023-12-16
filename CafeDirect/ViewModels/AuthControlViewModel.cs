@@ -38,16 +38,16 @@ namespace CafeDirect.ViewModels
         {
             DataBaseContext context = new DataBaseContext();
             var employee = context.Employees.FirstOrDefault(e => e.Password == Password && e.Login == Login);
-            HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
+            HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
             if (employee != null)
             {
-                HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
+                HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
                 if (employee.Role == "admin")
-                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
+                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
                 else if (employee.Role == "waiter")
-                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
+                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
                 else if (employee.Role == "cook")
-                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel());
+                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
                 else
                 {
                     // TODO: Вывести признак ошибки в пароле или логине

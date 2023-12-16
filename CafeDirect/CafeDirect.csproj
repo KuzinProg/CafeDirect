@@ -57,4 +57,12 @@
         <HintPath>C:\Users\aboev\.nuget\packages\avalonia.controls.datagrid\11.0.5\lib\net6.0\Avalonia.Controls.DataGrid.dll</HintPath>
       </Reference>
     </ItemGroup>
+
+    <ItemGroup>
+      <AvaloniaXaml Remove="Views\OrderView.axaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Views\OrderView.axaml" />
+    </ItemGroup>
 </Project>

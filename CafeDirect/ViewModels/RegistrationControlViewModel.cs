@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Runtime.Serialization;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
@@ -122,8 +124,15 @@ namespace CafeDirect.ViewModels
 
         private async void LoadPhoto()
         {
-            /*var topLevel = TopLevel.GetTopLevel();
-            var file = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());*/
+            if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
+                desktop.MainWindow?.StorageProvider is not { } provider)
+                throw new NullReferenceException("Missing StorageProvider instance.");
+
+            var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
+            {
+                Title = "Open Text File",
+                AllowMultiple = false
+            });
         }
     }
 }
