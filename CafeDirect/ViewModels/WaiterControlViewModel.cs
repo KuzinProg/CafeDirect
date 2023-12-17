@@ -21,8 +21,9 @@ namespace CafeDirect.ViewModels
             set => this.RaiseAndSetIfChanged(ref router, value);
         }
 
-        public WaiterControlViewModel()
+        public WaiterControlViewModel(IScreen screen)
         {
+            HostScreen = screen;
             DataBaseContext context = new DataBaseContext();
             Orders = new ObservableCollection<Order>(context.Orders);
         }
