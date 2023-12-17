@@ -3,6 +3,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CafeDirect.Views.CookControlView">
-    
+             x:Class="CafeDirect.Views.CookControlView"
+             xmlns:vm="using:CafeDirect.ViewModels"
+             x:DataType="vm:CookControlViewModel">
+    <DataGrid BorderBrush="Gray"
+              BorderThickness="1" AutoGenerateColumns="False"
+              ItemsSource="{Binding Orders}" >
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Номер заказа" Binding="{Binding OrderId}" />
+            <DataGridTextColumn Header="Официант">
+                <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource EmployeeConverter}">
+                        <Binding Path="WaiterNavigation.LastName" />
+                        <Binding Path="WaiterNavigation.FirstName" />
+                        <Binding Path="WaiterNavigation.MiddleName" />
+                    </MultiBinding>
+                </DataGridTextColumn.Binding>
+            </DataGridTextColumn>
+            <DataGridTextColumn Header="Статус" Binding="{Binding Status, Converter={StaticResource StatusConverter}}" />
+            <DataGridTextColumn Header="Дата" Binding="{Binding Date}" />
+            <DataGridTextColumn Header="Столик" Binding="{Binding Place}" />
+            <DataGridTextColumn Header="Гостей" Binding="{Binding ClientsCount}" />
+        </DataGrid.Columns>
+    </DataGrid>
 </UserControl>
