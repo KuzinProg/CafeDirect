@@ -28,6 +28,7 @@ public class App : Application
         Locator.CurrentMutable.Register<IViewFor<AuthControlViewModel>>(() => new AuthControlView());
         Locator.CurrentMutable.Register<IViewFor<RegistrationControlViewModel>>(() => new RegistrationControlView());
         Locator.CurrentMutable.Register<IViewFor<AdminControlViewModel>>(() => new AdminControlView());
+        Locator.CurrentMutable.Register<IViewFor<CookControlViewModel>>(() => new CookControlView());
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {

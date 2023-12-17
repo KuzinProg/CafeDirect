@@ -5,25 +5,29 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CafeDirect.Views.CookControlView"
              xmlns:vm="using:CafeDirect.ViewModels"
-             x:DataType="vm:CookControlViewModel">
-    <DataGrid BorderBrush="Gray"
-              BorderThickness="1" AutoGenerateColumns="False"
-              ItemsSource="{Binding Orders}" >
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="Номер заказа" Binding="{Binding OrderId}" />
-            <DataGridTextColumn Header="Официант">
-                <DataGridTextColumn.Binding>
-                    <MultiBinding Converter="{StaticResource EmployeeConverter}">
-                        <Binding Path="WaiterNavigation.LastName" />
-                        <Binding Path="WaiterNavigation.FirstName" />
-                        <Binding Path="WaiterNavigation.MiddleName" />
-                    </MultiBinding>
-                </DataGridTextColumn.Binding>
-            </DataGridTextColumn>
-            <DataGridTextColumn Header="Статус" Binding="{Binding Status, Converter={StaticResource StatusConverter}}" />
-            <DataGridTextColumn Header="Дата" Binding="{Binding Date}" />
-            <DataGridTextColumn Header="Столик" Binding="{Binding Place}" />
-            <DataGridTextColumn Header="Гостей" Binding="{Binding ClientsCount}" />
-        </DataGrid.Columns>
-    </DataGrid>
+             x:DataType="vm:CookControlViewModel"
+             xmlns:models="clr-namespace:CafeDirect.Models">
+    <UserControl.Resources>
+        <models:StatusConverter x:Key="StatusConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" BorderBrush="Gray" Height="250" IsReadOnly="True"
+                  BorderThickness="1" AutoGenerateColumns="False"
+                  ItemsSource="{Binding Orders}"
+                  x:Name="OrdersGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер заказа" Binding="{Binding OrderId}" />
+                <DataGridTextColumn Header="Статус"
+                                    Binding="{Binding Status, Converter={StaticResource StatusConverter}}" />
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Столик" Binding="{Binding Place}" />
+                <DataGridTextColumn Header="Гостей" Binding="{Binding ClientsCount}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <ListBox Grid.Row="1" ItemsSource="{Binding ElementName=OrdersGrid, Path=SelectedItem}"></ListBox>
+    </Grid>
 </UserControl>

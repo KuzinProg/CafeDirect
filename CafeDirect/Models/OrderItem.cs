@@ -11,6 +11,8 @@ public partial class OrderItem
 
     public long? MenuItem { get; set; }
 
+    // TODO: Кол-во!
+
     public virtual Menu? MenuItemNavigation { get; set; }
 
     public virtual Order OrderNavigation { get; set; } = null!;

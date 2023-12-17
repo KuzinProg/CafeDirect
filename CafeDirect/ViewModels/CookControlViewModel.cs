@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using CafeDirect.Models;
@@ -21,8 +22,9 @@ namespace CafeDirect.ViewModels
             set => this.RaiseAndSetIfChanged(ref router, value);
         }
 
-        public CookControlViewModel()
+        public CookControlViewModel(IScreen screen)
         {
+            HostScreen = screen;
             DataBaseContext context = new DataBaseContext();
             Orders = new ObservableCollection<Order>(context.Orders);
         }

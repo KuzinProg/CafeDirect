@@ -2,6 +2,7 @@ using System.Linq;
 using System.Reactive;
 using System.Runtime.Serialization;
 using CafeDirect.Context;
+using CafeDirect.Models;
 using ReactiveUI;
 
 namespace CafeDirect.ViewModels
@@ -37,19 +38,18 @@ namespace CafeDirect.ViewModels
         void Enter()
         {
             DataBaseContext context = new DataBaseContext();
-            var employee = context.Employees.FirstOrDefault(e => e.Password == Password && e.Login == Login);
+            Employee employee = context.Employees.FirstOrDefault(e => e.Password == Password && e.Login == Login);
 #if DEBUG
-            HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
+            HostScreen.Router.NavigateAndReset.Execute(new CookControlViewModel(HostScreen));
 #else
             if (employee != null)
             {
-                HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
                 if (employee.Role == "admin")
                     HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
                 else if (employee.Role == "waiter")
-                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
+                    HostScreen.Router.NavigateAndReset.Execute(new WaiterControlViewModel(HostScreen));
                 else if (employee.Role == "cook")
-                    HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
+                    HostScreen.Router.NavigateAndReset.Execute(new CookControlViewModel(HostScreen));
                 else
                 {
                     // TODO: Вывести признак ошибки в пароле или логине
