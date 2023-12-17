@@ -19,6 +19,7 @@ namespace CafeDirect.ViewModels
         private RoutingState router = new RoutingState();
 
         public ReactiveCommand<Unit, IRoutableViewModel> RegistrationCommand { get; }
+        public ReactiveCommand<Unit, Unit> EditEmployeeCommand { get; }
 
         public RoutingState Router
         {
@@ -29,15 +30,27 @@ namespace CafeDirect.ViewModels
         public ObservableCollection<Employee> Employees { get; }
         public ObservableCollection<Order> Orders { get; }
 
+        private Employee _currentEmployee;
+        public Employee CurrentEmployee
+        {
+            get => _currentEmployee;
+            set => this.RaiseAndSetIfChanged(ref _currentEmployee, value);
+        }
+
         public AdminControlViewModel(IScreen screen)
         {
             HostScreen = screen;
             DataBaseContext context = new DataBaseContext();
             Employees = new ObservableCollection<Employee>(context.Employees);
             Orders = new ObservableCollection<Order>(context.Orders);
-
+            EditEmployeeCommand = ReactiveCommand.Create(EditEmployee);
             RegistrationCommand = ReactiveCommand.CreateFromObservable(() =>
                 HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel(HostScreen)));
+        }
+
+        public void EditEmployee()
+        {
+            HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel(HostScreen, CurrentEmployee));
         }
     }
 }

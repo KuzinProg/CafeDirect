@@ -1,13 +1,17 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using CafeDirect.ViewModels;
+using ReactiveUI;
 
 namespace CafeDirect.Views;
 
-public partial class OrderView : UserControl
+public class OrderView : ReactiveUserControl<OrderViewModel>
 {
     public OrderView()
     {
-        InitializeComponent();
+        this.WhenActivated(disposables => { });
+        AvaloniaXamlLoader.Load(this);
     }
 }

@@ -13,7 +13,7 @@ public class RoleConverter : IValueConverter
             string role = (string)value;
             if (role == "admin") return "Администратор";
             if (role == "cook") return "Повар";
-            if (role == "waiter") return "Администратор";
+            if (role == "waiter") return "Официант";
         }
 
         return value as string;
@@ -21,6 +21,14 @@ public class RoleConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        return null;
+        if (value is string)
+        {
+            string role = (string)value;
+            if (role == "Администратор") return "admin";
+            if (role == "Повар") return "cook";
+            if (role == "Официант") return "waiter";
+        }
+
+        return value as string;
     }
 }

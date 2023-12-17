@@ -22,7 +22,7 @@
                 <Button>Загрузить...</Button>
                 <DockPanel HorizontalAlignment="Center">
                     <Button Command="{Binding CancelCommand}">Отмена</Button>
-                    <Button Command="{Binding RegCommand}">Регистрация</Button>
+                    <Button Command="{Binding RegCommand}" Content="{Binding FinalButtonValue}" />
                 </DockPanel>
             </StackPanel>
     </Grid>

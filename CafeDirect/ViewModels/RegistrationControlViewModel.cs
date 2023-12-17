@@ -22,19 +22,47 @@ namespace CafeDirect.ViewModels
         private string _firstname;
         private string _lastname;
         private string _middlename;
-        private Role _role;
+        private Role? _role;
+        private string _photo;
+        private string _contract;
         public IScreen HostScreen { get; }
 
         private RoutingState router = new RoutingState();
+
+        private Employee _currentEmployee = null;
+
+        public Employee CurrentEmployee {
+            get => _currentEmployee;
+            set => this.RaiseAndSetIfChanged(ref _currentEmployee, value);
+        }
+
+        private string _finalButtonValue;
+
+        public string FinalButtonValue
+        {
+            get => CurrentEmployee == null ? "Создать" : "Обновить";
+            set => this.RaiseAndSetIfChanged(ref _finalButtonValue, value);
+        }
         
         public ReactiveCommand<Unit, IRoutableViewModel> CancelCommand { get; }
         public ReactiveCommand<Unit, Unit> RegCommand { get; }
         
-        public RegistrationControlViewModel(IScreen screen)
+        public RegistrationControlViewModel(IScreen screen, Employee? employee = null)
         {
             HostScreen = screen;
+            _currentEmployee = employee;
+            if (employee != null)
+            {
+                _password = employee.Password;
+                _login = employee.Login;
+                _firstname = employee.FirstName;
+                _lastname = employee.LastName;
+                _middlename = employee.MiddleName;
+                RoleValue = Roles.Find(o => o.Code == employee.Role);
+            }
+
             CancelCommand = ReactiveCommand.CreateFromObservable(() =>
-                HostScreen.Router.NavigateAndReset.Execute(new AuthControlViewModel(HostScreen)));
+                HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen)));
             LoadPhotoCommand = ReactiveCommand.Create(LoadPhoto);
             RegCommand = ReactiveCommand.Create(Reg);
         }
@@ -45,14 +73,14 @@ namespace CafeDirect.ViewModels
             public string Code { get; set; }
         }
 
-        private List<Role> roles = new List<Role>
+        private List<Role?> roles = new List<Role?>
         {
             new Role {Name = "Администратор", Code = "admin"},
             new Role {Name = "Повар", Code = "cook"},
             new Role {Name = "Официант", Code = "waiter"},
         };
 
-        public List<Role> Roles {
+        public List<Role?> Roles {
             get => roles;
             set => this.RaiseAndSetIfChanged(ref roles, value);
         }
@@ -63,15 +91,15 @@ namespace CafeDirect.ViewModels
             set => this.RaiseAndSetIfChanged(ref router, value);
         }
         
-        public string Password
+        public string? Password
         {
             get => _password;
             set => this.RaiseAndSetIfChanged(ref _password, value);
         }
 
-        public string Login
+        public string? Login
         {
-            get => _login;
+            get => _currentEmployee.Login;
             set => this.RaiseAndSetIfChanged(ref _login, value);
         }
         
@@ -81,7 +109,7 @@ namespace CafeDirect.ViewModels
             set => this.RaiseAndSetIfChanged(ref _firstname, value);
         }
 
-        public Role RoleValue
+        public Role? RoleValue
         {
             get => _role;
             set => this.RaiseAndSetIfChanged(ref _role, value);

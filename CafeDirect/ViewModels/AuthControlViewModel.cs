@@ -38,7 +38,9 @@ namespace CafeDirect.ViewModels
         {
             DataBaseContext context = new DataBaseContext();
             var employee = context.Employees.FirstOrDefault(e => e.Password == Password && e.Login == Login);
+#if DEBUG
             HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
+#else
             if (employee != null)
             {
                 HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
@@ -53,6 +55,7 @@ namespace CafeDirect.ViewModels
                     // TODO: Вывести признак ошибки в пароле или логине
                 }
             }
+#endif
         }
 
         public string? UrlPathSegment { get; }
