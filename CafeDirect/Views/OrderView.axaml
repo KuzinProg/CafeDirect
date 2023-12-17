@@ -9,9 +9,9 @@
              x:DataType="vm:OrderViewModel">
     <StackPanel Spacing="10" Margin="200, 0">
       <!--  <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding }" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> Официант -->
-        <DatePicker/><!--Дата -->
-        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding StatusValue}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Статус -->
-        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding Place}" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Столик -->
+        <DatePicker SelectedDate="{Binding Date}" /><!--Дата -->
+        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding StatusValue}" ItemsSource="{Binding StatusValue}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Статус -->
+        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding Place}" ItemsSource="{Binding Place}"></ComboBox> <!--Столик -->
         <TextBox Watermark="Количество людей" Text="{Binding ClientsCount}"/><!--Сколько человек -->
         <DockPanel HorizontalAlignment="Center">
             <Button Command="{Binding CancelCommand}">Отмена</Button>

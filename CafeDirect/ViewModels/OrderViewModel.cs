@@ -16,7 +16,7 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
     private RoutingState router = new RoutingState();
-    private int _clientcount;
+    private int _clientCount;
     private int _place;
     private Status _status;
     private DateTime _date;
@@ -37,24 +37,19 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
     }
     
     
-    private List<Status> statuses = new List<Status>
+    private List<Status> statuses = new()
     {
         new Status {Name = "Принят", Code = "active"},
         new Status {Name = "Оплачен", Code = "paid"},
         new Status {Name = "Готовится", Code = "preparing"},
-        new Status {Name = "Готов", Code = "reade"},
+        new Status {Name = "Готов", Code = "ready"},
         new Status {Name = "Отменён", Code = "canceled"},
     };
     
-    public List<Status> Roles {
-        get => statuses;
-        set => this.RaiseAndSetIfChanged(ref statuses, value);
-    }
-    
     public int ClientsCount
     {
-        get => _clientcount;
-        set => this.RaiseAndSetIfChanged(ref _clientcount, value);
+        get => _clientCount;
+        set => this.RaiseAndSetIfChanged(ref _clientCount, value);
     }
     
     public int Place
@@ -66,7 +61,7 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
     public DateTime Date
     {
         get => _date;
-        set => this.RaiseAndSetIfChanged(ref _date, value);
+        set => this.RaiseAndSetIfChanged(ref _date, ((DateTimeOffset)value).UtcDateTime);
     }
     
     public Status StatusValue
@@ -75,20 +70,19 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _status, value);
     }
     
-    public OrderViewModel(IScreen screen)
+    public OrderViewModel(IScreen screen, Order order)
     {
-        /*HostScreen = screen;
+        HostScreen = screen;
         CancelCommand = ReactiveCommand.CreateFromObservable(() =>
-            HostScreen.Router.NavigateAndReset.Execute(new (HostScreen)));
-        OrderCommand = ReactiveCommand.Create(Reg);*/
+            HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen)));
         OrderCommand = ReactiveCommand.Create(NewOrder);
-        
     }
     
     private void NewOrder()
     {
         // TODO: Проверка корректности
         // TODO: Официанты
+        /*
         DataBaseContext context = new DataBaseContext();
         context.Orders.Add(new Order
         {
@@ -100,6 +94,7 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
             
         });
         context.SaveChanges();
+        */
     }
     
 }
