@@ -20,6 +20,8 @@ namespace CafeDirect.ViewModels
 
         public ReactiveCommand<Unit, IRoutableViewModel> RegistrationCommand { get; }
         public ReactiveCommand<Unit, Unit> EditEmployeeCommand { get; }
+        
+        public ReactiveCommand<Unit, IRoutableViewModel> ExitCommand { get; }
 
         public RoutingState Router
         {
@@ -46,6 +48,8 @@ namespace CafeDirect.ViewModels
             EditEmployeeCommand = ReactiveCommand.Create(EditEmployee);
             RegistrationCommand = ReactiveCommand.CreateFromObservable(() =>
                 HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel(HostScreen)));
+            ExitCommand = ReactiveCommand.CreateFromObservable(() =>
+                HostScreen.Router.NavigateAndReset.Execute(new AuthControlViewModel(HostScreen)));
         }
 
         public void EditEmployee()
