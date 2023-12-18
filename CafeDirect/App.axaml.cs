@@ -30,7 +30,8 @@ public class App : Application
         Locator.CurrentMutable.Register<IViewFor<AdminControlViewModel>>(() => new AdminControlView());
         Locator.CurrentMutable.Register<IViewFor<CookControlViewModel>>(() => new CookControlView());
         Locator.CurrentMutable.Register<IViewFor<WaiterControlViewModel>>(() => new WaiterControlView());
-        
+        Locator.CurrentMutable.Register<IViewFor<OrderViewModel>>(() => new OrderView());
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindowView { DataContext = Locator.Current.GetService<IScreen>()};

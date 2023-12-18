@@ -11,8 +11,11 @@
       <!--  <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding }" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> Официант -->
         <DatePicker SelectedDate="{Binding Date}" /><!--Дата -->
         <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding StatusValue}" ItemsSource="{Binding StatusValue}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Статус -->
-        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding Place}" ItemsSource="{Binding Place}"></ComboBox> <!--Столик -->
+        <TextBox Watermark="Номер столика" HorizontalAlignment="Stretch" Text="{Binding Place}"></TextBox> <!--Столик -->
         <TextBox Watermark="Количество людей" Text="{Binding ClientsCount}"/><!--Сколько человек -->
+
+        <ListBox ItemsSource="{Binding OrderItems}"></ListBox>
+
         <DockPanel HorizontalAlignment="Center">
             <Button Command="{Binding CancelCommand}">Отмена</Button>
             <Button Command="{Binding OrderCommand}">Сохранить изменения</Button>

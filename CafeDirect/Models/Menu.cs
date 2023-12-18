@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CafeDirect.Models;
 
-public partial class Menu
+public class Menu
 {
     public long MenuId { get; set; }
 

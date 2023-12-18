@@ -20,8 +20,9 @@ namespace CafeDirect.ViewModels
 
         public ReactiveCommand<Unit, IRoutableViewModel> RegistrationCommand { get; }
         public ReactiveCommand<Unit, Unit> EditEmployeeCommand { get; }
-        
+        public ReactiveCommand<Unit, Unit> FireEmployeeCommand { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> ExitCommand { get; }
+        private DataBaseContext context;
 
         public RoutingState Router
         {
@@ -42,7 +43,7 @@ namespace CafeDirect.ViewModels
         public AdminControlViewModel(IScreen screen)
         {
             HostScreen = screen;
-            DataBaseContext context = new DataBaseContext();
+            context = new DataBaseContext();
             Employees = new ObservableCollection<Employee>(context.Employees);
             Orders = new ObservableCollection<Order>(context.Orders);
             EditEmployeeCommand = ReactiveCommand.Create(EditEmployee);
@@ -50,11 +51,20 @@ namespace CafeDirect.ViewModels
                 HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel(HostScreen)));
             ExitCommand = ReactiveCommand.CreateFromObservable(() =>
                 HostScreen.Router.NavigateAndReset.Execute(new AuthControlViewModel(HostScreen)));
+            FireEmployeeCommand = ReactiveCommand.Create(FireEmployee);
         }
 
         public void EditEmployee()
         {
             HostScreen.Router.NavigateAndReset.Execute(new RegistrationControlViewModel(HostScreen, CurrentEmployee));
+        }
+
+        public void FireEmployee()
+        {
+            CurrentEmployee.Status = "fired";
+            context.SaveChanges();
+            // TODO: Обновление DataGrid
+            HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
         }
     }
 }

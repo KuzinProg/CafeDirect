@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CafeDirect.Models;
 
-public partial class Schedule
+public class Schedule
 {
     public int ScheduleId { get; set; }
 

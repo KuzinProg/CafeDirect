@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using CafeDirect.ViewModels;
 
 namespace CafeDirect.Models;
 
-public partial class Order
+public class Order
 {
     public long OrderId { get; set; }
 
     public long Waiter { get; set; }
 
-    public string? Status { get; set; }
+    public string Status { get; set; }
 
     public DateTime? Date { get; set; }
 

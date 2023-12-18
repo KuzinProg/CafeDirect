@@ -16,6 +16,14 @@ namespace CafeDirect.ViewModels
         private RoutingState router = new RoutingState();
         public ObservableCollection<Order> Orders { get; }
 
+        private Order _currentOrder;
+
+        public Order CurrentOrder
+        {
+            get => _currentOrder;
+            set => this.RaiseAndSetIfChanged(ref _currentOrder, value);
+        }
+
         public RoutingState Router
         {
             get => router;

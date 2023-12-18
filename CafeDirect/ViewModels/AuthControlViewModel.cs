@@ -40,7 +40,9 @@ namespace CafeDirect.ViewModels
             DataBaseContext context = new DataBaseContext();
             Employee employee = context.Employees.FirstOrDefault(e => e.Password == Password && e.Login == Login);
 #if DEBUG
-            HostScreen.Router.NavigateAndReset.Execute(new CookControlViewModel(HostScreen));
+            employee = context.Employees.FirstOrDefault(e => e.Password == "123456" && e.Login == "admin");
+            if (employee != null)
+                HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
 #else
             if (employee != null)
             {
@@ -60,6 +62,7 @@ namespace CafeDirect.ViewModels
 
         public string? UrlPathSegment { get; }
         public IScreen HostScreen { get; }
+
         public RoutingState Router
         {
             get => router;
