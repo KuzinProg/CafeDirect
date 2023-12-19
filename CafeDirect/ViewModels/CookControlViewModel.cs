@@ -51,7 +51,7 @@ namespace CafeDirect.ViewModels
             context = new DataBaseContext();
             context.OrderItems.Load();
             context.Menus.Load();
-            _orders = new ObservableCollection<Order>(context.Orders);
+            _orders = new ObservableCollection<Order>(context.Orders.Where(o=>o.Status == "new" || o.Status == "preparing"));
         }
 
         void Preparing()
@@ -60,7 +60,9 @@ namespace CafeDirect.ViewModels
             context.SaveChanges();
             Orders.Clear();
             context = new DataBaseContext();
-            Orders.AddRange(context.Orders);
+            context.OrderItems.Load();
+            context.Menus.Load();
+            Orders.AddRange(context.Orders.Where(o=>o.Status == "new" || o.Status == "preparing"));
         }
 
         void Ready()
@@ -69,7 +71,9 @@ namespace CafeDirect.ViewModels
             context.SaveChanges();
             Orders.Clear();
             context = new DataBaseContext();
-            Orders.AddRange(context.Orders);
+            context.OrderItems.Load();
+            context.Menus.Load();
+            Orders.AddRange(context.Orders.Where(o=>o.Status == "new" || o.Status == "preparing"));
         }
     }
 }
