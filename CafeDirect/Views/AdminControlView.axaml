@@ -41,11 +41,6 @@
             <Button Command="{Binding EditEmployeeCommand}">Просмотр</Button>
             <Button Command="{Binding FireEmployeeCommand}">Уволить</Button>
         </DockPanel>
-        
-
-
-
-        
         <DataGrid Grid.Row="2"  Grid.Column="0" Height="250" BorderBrush="Gray"
                   BorderThickness="1" AutoGenerateColumns="False"
                   ItemsSource="{Binding Orders}">

@@ -42,7 +42,7 @@ namespace CafeDirect.ViewModels
 #if DEBUG
             employee = context.Employees.FirstOrDefault(e => e.Password == "123456" && e.Login == "admin");
             if (employee != null)
-                HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen));
+                HostScreen.Router.NavigateAndReset.Execute(new CookControlViewModel(HostScreen));
 #else
             if (employee != null)
             {
