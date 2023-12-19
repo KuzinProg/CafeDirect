@@ -40,9 +40,9 @@ namespace CafeDirect.ViewModels
             DataBaseContext context = new DataBaseContext();
             Employee employee = context.Employees.FirstOrDefault(e => e.Password == Password && e.Login == Login);
 #if DEBUG
-            employee = context.Employees.FirstOrDefault(e => e.Password == "123456" && e.Login == "admin");
+            employee = context.Employees.FirstOrDefault(e => e.Password == "12345" && e.Login == "admin");
             if (employee != null)
-                HostScreen.Router.NavigateAndReset.Execute(new CookControlViewModel(HostScreen));
+                HostScreen.Router.NavigateAndReset.Execute(new WaiterControlViewModel(HostScreen));
 #else
             if (employee != null)
             {
