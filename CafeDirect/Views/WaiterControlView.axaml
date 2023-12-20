@@ -16,6 +16,7 @@
             <RowDefinition Height="400"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <!-- TODO: Не работает Мультибиндинг
         <TextBlock Grid.Row="0" Text="{Binding CurrentWaiter, Converter={StaticResource EmployeeConverter}}">
@@ -43,7 +44,9 @@
         <DockPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
             <Button Command="{Binding AddNewOrderCommand}">Создать</Button>
             <Button Command="{Binding EditOrderCommand}">Просмотр</Button>
+            <Button Command="{Binding}">Оплачен</Button>
         </DockPanel>
-        <Button Grid.Row="2" HorizontalAlignment="Center" Command="{Binding ExitCommand}">Выход</Button>
+        <Button Grid.Row="2" HorizontalAlignment="Center" Command="{Binding AllOrdersReportCommand}">Отчёт о заказах</Button>
+        <Button Grid.Row="3" HorizontalAlignment="Center" Command="{Binding ExitCommand}">Выход</Button>
     </Grid>
 </UserControl>
