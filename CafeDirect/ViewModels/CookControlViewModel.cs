@@ -22,6 +22,7 @@ namespace CafeDirect.ViewModels
         public ReactiveCommand<Unit, Unit> PreparingCommand { get; }
         public ReactiveCommand<Unit, Unit> ReadyCommand { get; }
         public ObservableCollection<Order> _orders;
+        public ReactiveCommand<Unit, IRoutableViewModel> ExitCommand { get; }
 
         public ObservableCollection<Order> Orders
         {
@@ -52,6 +53,8 @@ namespace CafeDirect.ViewModels
             context.OrderItems.Load();
             context.Menus.Load();
             _orders = new ObservableCollection<Order>(context.Orders.Where(o=>o.Status == "new" || o.Status == "preparing"));
+            ExitCommand = ReactiveCommand.CreateFromObservable(() =>
+                HostScreen.Router.NavigateAndReset.Execute(new AuthControlViewModel(HostScreen)));
         }
 
         void Preparing()

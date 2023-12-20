@@ -16,6 +16,7 @@ namespace CafeDirect.ViewModels
 
         [DataMember]
         private RoutingState router = new RoutingState();
+        
 
         public AuthControlViewModel(IScreen screen)
         {
