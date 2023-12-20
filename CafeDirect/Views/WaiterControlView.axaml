@@ -17,7 +17,15 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <!-- TODO <Label Grid.Row="0" Content="{Binding CurrentWaiter, Converter={StaticResource EmployeeConverter}}"></Label> -->
+        <!-- TODO: Не работает Мультибиндинг
+        <TextBlock Grid.Row="0" Text="{Binding CurrentWaiter, Converter={StaticResource EmployeeConverter}}">
+            <MultiBinding>
+                    <Binding Path="CurrentWaiter.LastName" FallbackValue="" />
+                    <Binding Path="CurrentWaiter.FirstName" FallbackValue="" />
+                    <Binding Path="CurrentWaiter.MiddleName" FallbackValue="" />
+            </MultiBinding>
+        </TextBlock>
+        -->
         <DataGrid Grid.Row="0" BorderBrush="Gray"
                   BorderThickness="1" AutoGenerateColumns="False"
                   ItemsSource="{Binding Orders}"

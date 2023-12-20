@@ -27,7 +27,8 @@
         </Grid.ColumnDefinitions>
         <DataGrid Grid.Row="0" Grid.Column="0" Height="250" BorderBrush="Gray"
                   BorderThickness="1" AutoGenerateColumns="False" IsReadOnly="True"
-                  ItemsSource="{Binding Employees}" SelectedItem="{Binding CurrentEmployee}">
+                  ItemsSource="{Binding Employees}"
+                  SelectedItem="{Binding CurrentEmployee}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
                 <DataGridTextColumn Header="Имя"  Binding="{Binding FirstName}"/>
@@ -65,13 +66,18 @@
         <Button Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding EditEmployeeCommand} ">Просмотр</Button>
 
         <StackPanel Grid.Row="0" Grid.Column="1" >
-            <Calendar HorizontalAlignment="Center"></Calendar>
+            <!-- DisplayDateChanged="{Binding}" -->
+            <Calendar HorizontalAlignment="Center" SelectedDate="{Binding CurrentDate}"></Calendar>
             <StackPanel>
                 <Label>Смена 1</Label>
+                <ComboBox></ComboBox>
+                <Button>Добавить</Button>
                 <ListBox></ListBox>
             </StackPanel>
             <StackPanel>
                 <Label>Смена 2</Label>
+                <ComboBox></ComboBox>
+                <Button>Добавить</Button>
                 <ListBox></ListBox>
             </StackPanel>
         </StackPanel>

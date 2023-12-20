@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using ReactiveUI;
 using CafeDirect.Context;
 using CafeDirect.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CafeDirect.ViewModels
 {
@@ -44,6 +45,7 @@ namespace CafeDirect.ViewModels
             CurrentWaiter = employee;
             HostScreen = screen;
             DataBaseContext context = new DataBaseContext();
+            context.Employees.Load();
             Orders = new ObservableCollection<Order>(context.Orders);
             AddNewOrderCommand = ReactiveCommand.CreateFromObservable(() =>
                 HostScreen.Router.NavigateAndReset.Execute(new OrderViewModel(HostScreen, CurrentWaiter)));

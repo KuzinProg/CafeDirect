@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using CafeDirect.Context;
 using CafeDirect.Models;
 using ReactiveUI;
+using Splat;
 
 namespace CafeDirect.ViewModels
 {
@@ -13,6 +14,7 @@ namespace CafeDirect.ViewModels
         private string _password;
         private string _login;
 
+        [DataMember]
         private RoutingState router = new RoutingState();
 
         public AuthControlViewModel(IScreen screen)
@@ -23,12 +25,14 @@ namespace CafeDirect.ViewModels
 
         public ReactiveCommand<Unit, Unit> EnterCommand { get; }
 
+        [DataMember]
         public string Password
         {
             get => _password;
             set => this.RaiseAndSetIfChanged(ref _password, value);
         }
 
+        [DataMember]
         public string Login
         {
             get => _login;
@@ -40,9 +44,10 @@ namespace CafeDirect.ViewModels
             DataBaseContext context = new DataBaseContext();
             Employee employee = context.Employees.FirstOrDefault(e => e.Password == Password && e.Login == Login);
 #if DEBUG
-            employee = context.Employees.FirstOrDefault(e => e.Password == "12345" && e.Login == "admin");
+            employee = context.Employees.FirstOrDefault(e => e.Password == "123" && e.Login == "waiter1");
             if (employee != null)
-                HostScreen.Router.NavigateAndReset.Execute(new WaiterControlViewModel(HostScreen));
+                //HostScreen.Router.Navigate.Execute(new WaiterControlViewModel(HostScreen, employee));
+                HostScreen.Router.NavigateAndReset.Execute(new WaiterControlViewModel(HostScreen, employee));
 #else
             if (employee != null)
             {

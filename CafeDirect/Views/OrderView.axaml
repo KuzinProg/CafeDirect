@@ -3,18 +3,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CafeDirect.Views.OrderViewModel"
+             x:Class="CafeDirect.Views.OrderView"
              xmlns:vm="using:CafeDirect.ViewModels"
              xmlns:models="clr-namespace:CafeDirect.Models"
              x:DataType="vm:OrderViewModel">
     <StackPanel Spacing="10" Margin="200, 0">
-      <!--  <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding }" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> Официант -->
-        <DatePicker SelectedDate="{Binding Date}" /><!--Дата -->
-        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding StatusValue}" ItemsSource="{Binding StatusValue}" DisplayMemberBinding="{Binding Name}"></ComboBox> <!--Статус -->
-        <TextBox Watermark="Номер столика" HorizontalAlignment="Stretch" Text="{Binding Place}"></TextBox> <!--Столик -->
-        <TextBox Watermark="Количество людей" Text="{Binding ClientsCount}"/><!--Сколько человек -->
+        <!-- <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding }" ItemsSource="{Binding Roles}" DisplayMemberBinding="{Binding Name}"></ComboBox> Официант -->
+        <!-- <DatePicker SelectedDate="{Binding Date}" /> --><!--Дата -->
+        <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding StatusValue}"
+                  ItemsSource="{Binding Statuses}" DisplayMemberBinding="{Binding Name}" /> <!--Статус -->
+        <TextBox Watermark="Номер столика" HorizontalAlignment="Stretch" Text="{Binding Place}"></TextBox>
+        <!--Столик -->
+        <TextBox Watermark="Количество людей" Text="{Binding ClientsCount}" /><!--Сколько человек -->
 
-        <ListBox ItemsSource="{Binding OrderItems}"></ListBox>
+        <ComboBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding CurrentMenuItem}" DisplayMemberBinding="{Binding Name}" />
+        <Button Command="{Binding AddMenuItem}">Добавить блюдо</Button>
+        <ItemsControl ItemsSource="{Binding SelectedMenuItems}" Height="250" BorderBrush="Gray" BorderThickness="1">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="models:Menu">
+                    <TextBox IsReadOnly="True" Text="{Binding Name, FallbackValue=null}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <DockPanel HorizontalAlignment="Center">
             <Button Command="{Binding CancelCommand}">Отмена</Button>

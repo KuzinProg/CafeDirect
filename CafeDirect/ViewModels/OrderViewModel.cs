@@ -7,6 +7,8 @@ using System.Runtime.Serialization;
 using Avalonia.Data.Converters;
 using CafeDirect.Context;
 using CafeDirect.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ReactiveUI;
 
 namespace CafeDirect.ViewModels;
@@ -14,19 +16,20 @@ namespace CafeDirect.ViewModels;
 public class OrderViewModel : ReactiveObject, IRoutableViewModel
 {
     public string? UrlPathSegment { get; }
+    private DataBaseContext context;
     public IScreen HostScreen { get; }
     private RoutingState router = new RoutingState();
     private int? _clientCount;
     private int? _place;
-    private Status? _status;
+    private Status _status;
     private DateTime? _date;
     private Employee? _currentWaiter = null;
-    private ObservableCollection<OrderItem> _orderItems;
+    private ObservableCollection<Menu> _selectedMenuItems;
 
-    public ObservableCollection<OrderItem> OrderItems
+    public ObservableCollection<Menu> SelectedMenuItems
     {
-        get => _orderItems;
-        set => this.RaiseAndSetIfChanged(ref _orderItems, value);
+        get => _selectedMenuItems;
+        set => this.RaiseAndSetIfChanged(ref _selectedMenuItems, value);
     }
 
     public Employee? CurrentWaiter
@@ -37,6 +40,7 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
 
     public ReactiveCommand<Unit, IRoutableViewModel> CancelCommand { get; }
     public ReactiveCommand<Unit, Unit> OrderCommand { get; }
+    public ReactiveCommand<Unit, Unit> AddMenuItemCommand { get; }
 
     public RoutingState Router
     {
@@ -53,12 +57,18 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
 
     private List<Status> statuses = new()
     {
-        new Status {Name = "Принят", Code = "active"},
+        new Status {Name = "Принят", Code = "new"},
         new Status {Name = "Оплачен", Code = "paid"},
         new Status {Name = "Готовится", Code = "preparing"},
         new Status {Name = "Готов", Code = "ready"},
         new Status {Name = "Отменён", Code = "canceled"},
     };
+
+    public List<Status> Statuses
+    {
+        get => statuses;
+        set => this.RaiseAndSetIfChanged(ref statuses, value);
+    }
 
     public int? ClientsCount
     {
@@ -78,19 +88,36 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _date, ((DateTimeOffset) value).UtcDateTime);
     }
 
-    public Status? StatusValue
+    public Status StatusValue
     {
         get => _status;
         set => this.RaiseAndSetIfChanged(ref _status, value);
     }
 
+    private Menu _currentMenuItem;
+
+    public Menu CurrentMenuItem
+    {
+        get => _currentMenuItem;
+        set => this.RaiseAndSetIfChanged(ref _currentMenuItem, value);
+    }
+
+    public ObservableCollection<Menu> MenuItems { get; }
+
     public OrderViewModel(IScreen screen, Employee? waiter = null)
     {
+        context = new DataBaseContext();
+        context.Employees.Load();
+        context.OrderItems.Load();
         CurrentWaiter = waiter;
         HostScreen = screen;
         CancelCommand = ReactiveCommand.CreateFromObservable(() =>
             HostScreen.Router.NavigateAndReset.Execute(new AdminControlViewModel(HostScreen)));
         OrderCommand = ReactiveCommand.Create(NewOrder);
+        context.Menus.Load();
+        MenuItems = new ObservableCollection<Menu>(context.Menus);
+        SelectedMenuItems = new ObservableCollection<Menu>();
+        AddMenuItemCommand = ReactiveCommand.Create(AddMenuItem);
     }
 
     public OrderViewModel(IScreen screen, Order order) : this(screen, order.WaiterNavigation)
@@ -99,6 +126,7 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
         Place = order.Place;
         StatusValue = statuses.Find(o=>o.Code==order.Status);
         Date = order.Date;
+        // TODO: Редактирование заказа. Преобразование в MenuItems
         //OrderItems = new ObservableCollection<OrderItem>(order.OrderItems);
     }
 
@@ -106,17 +134,30 @@ public class OrderViewModel : ReactiveObject, IRoutableViewModel
     {
         // TODO: Проверка корректности
         // TODO: Официанты
-
-        DataBaseContext context = new DataBaseContext();
         if (CurrentWaiter != null)
-            context.Orders.Add(new Order
+        {
+            EntityEntry<Order> order = context.Orders.Add(new Order
             {
                 Waiter = CurrentWaiter.EmployeeId,
                 Status = StatusValue.Code,
-                Date = Date,
+                Date = DateTime.Now,
                 Place = Place,
                 ClientsCount = ClientsCount,
             });
+            context.SaveChanges();
+            foreach (Menu menu in SelectedMenuItems)
+            {
+                context.OrderItems.Add(new OrderItem {Order = order.Entity.OrderId, MenuItem = menu.MenuId});
+            }
+        }
+
         context.SaveChanges();
+
+        HostScreen.Router.NavigateAndReset.Execute(new WaiterControlViewModel(HostScreen, CurrentWaiter));
+    }
+
+    public void AddMenuItem()
+    {
+        SelectedMenuItems.Add(CurrentMenuItem);
     }
 }
