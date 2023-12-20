@@ -36,5 +36,6 @@
             <Button Command="{Binding AddNewOrderCommand}">Создать</Button>
             <Button Command="{Binding EditOrderCommand}">Просмотр</Button>
         </DockPanel>
+        <Button Grid.Row="2" HorizontalAlignment="Center" Command="{Binding ExitCommand}">Выход</Button>
     </Grid>
 </UserControl>

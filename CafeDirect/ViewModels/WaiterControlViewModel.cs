@@ -17,6 +17,7 @@ namespace CafeDirect.ViewModels
         public ObservableCollection<Order> Orders { get; }
         private Employee? _currentWaiter = null;
         private Order? _currentOrder = null;
+        public ReactiveCommand<Unit, IRoutableViewModel> ExitCommand { get; }
 
         public ReactiveCommand<Unit, IRoutableViewModel> AddNewOrderCommand { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> EditOrderCommand { get; }
@@ -49,6 +50,8 @@ namespace CafeDirect.ViewModels
                 HostScreen.Router.NavigateAndReset.Execute(new OrderViewModel(HostScreen, CurrentWaiter)));
             EditOrderCommand = ReactiveCommand.CreateFromObservable(() =>
                 HostScreen.Router.NavigateAndReset.Execute(new OrderViewModel(HostScreen, CurrentOrder)));
+            ExitCommand = ReactiveCommand.CreateFromObservable(() =>
+                HostScreen.Router.NavigateAndReset.Execute(new AuthControlViewModel(HostScreen)));
         }
     }
 }
